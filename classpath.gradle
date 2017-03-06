@@ -19,12 +19,14 @@ task classpath {
       }
 
       for (conf in proj.configurations) {
+        if (conf.isCanBeResolved()) {
           for (dependency in conf) {
               if (dependency.name.endsWith("aar")) {
               } else {
                 classpathFiles += dependency
               }
           }
+        }
       }
       if (proj.hasProperty("android")) {
         classpathFiles += proj.android.getBootClasspath()
